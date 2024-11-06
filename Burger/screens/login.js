@@ -1,49 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import { Text, TextInput, StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
-//      <View 
-//        style={styles.Text}
-//        onPress={() => props.navigation.navigate ('olvido')}>
-//        <Text>¿olvido contraseña?</Text>
-//      </View>
+import { Text, TextInput, StyleSheet, View, ScrollView, TouchableOpacity, Alert } from 'react-native'
+
+import appfirabase from '../firebaseConfig';
+import { getAuth, singInWithEmailAndPassword } from 'firebase/auth';
+const auth =getAuth (appfirabase)
+
 
 export default function login(props) {
-  const [input1, setInput1] = useState('');
-  //const [input2, setInput2] = useState('');
+  const [Email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
-  
+
+  const logueo = async()=>{
+    try {
+        await singInWithEmailAndPassword(auth, Email, password)
+        Alert.alert('iniciando sesion', 'Acediendo..')
+        props.navigation.navigate('mostrador')
+    } catch (error) {
+        console.log(error);
+    }
+  }
   return (
     <View style={styles.container}>
       {/* Círculo */}
       <View style={styles.circle}>
+        <image source={require('@/assets/logomovil.png')} />
         <Text>Círculo</Text>
       </View>
 
       {/* Primer Input */}
-      <TextInput
+      <TextInput onChangeText={(text) => setEmail(text)}
         style={styles.input}
-        placeholder="Nombre de usuario o Correo electronico"
-        value={input1}
-        onChangeText={setInput1}
+        placeholder="Correo electronico"
       />
 
       {/* Segundo Input */}
-      <TextInput
+      <TextInput onChangeText={(text) => setPassword(text)}
         style={styles.input}
         placeholder="contraseña"
-        value={password}
-        onChangeText={setPassword}
         secureTextEntry={true}  // Hace que los caracteres se muestren como "*"
       />
 
       {/* Botón que navega a otra pantalla */}
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.buttonNavigate}
-        onPress={() => props.navigation.navigate('mostrador')}>
+        onPress={logueo}>
         <Text style={styles.buttonText}>Ingresar</Text>
       </TouchableOpacity>
 
     </View>
-  ); 
+  );
 }
 
 const styles = StyleSheet.create({

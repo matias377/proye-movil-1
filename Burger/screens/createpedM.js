@@ -39,9 +39,9 @@ export default function createpedM (props) {
             </View>
 
             <View >
-                <Button title="tomar peddido" onPress={savePedid}/>
+                <Button style={{marginvertical: 10}} title="tomar peddido" onPress={savePedid}/>
 
-                <Button title="cancelar" onPress={() => props.navigation.navigate('mostrador')}/>
+                <Button style={{marginvertical: 10}} title="cancelar" onPress={() => props.navigation.navigate('mostrador')}/>
             </View>
 
         </ScrollView>

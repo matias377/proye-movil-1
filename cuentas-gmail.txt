@@ -1,0 +1,5 @@
+cuenta encargado
+encargado@gmail.com contra 1234567
+
+cuenta mozo
+mozo@gmail.com   contra   89012345

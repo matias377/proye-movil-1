@@ -2,10 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import 'react-native-gesture-handler';
+import appfirabase from '../firebaseConfig';
+import * as firabase from 'firebase'; 
 import login from './screens/login';
 import mostrador from './screens/mostrador';
 import createpedM from './screens/createpedM';
 import mesas from './screens/mesas';
+
 
 export default function App() {
 
