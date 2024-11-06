@@ -17,6 +17,10 @@ export default function mostrador(props) {
           <Text style={styles.buttonText}>Mostrador</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('createpedM')}>
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity>
+
         {/* Botón de la derecha - Navega a la pantalla de Mesas */}
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('mesas')}>
           <Text style={styles.buttonText}>Mesas</Text>

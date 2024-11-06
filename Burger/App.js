@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import login from './screens/login';
 import mostrador from './screens/mostrador';
+import createpedM from './screens/createpedM';
 import mesas from './screens/mesas';
 
 export default function App() {
@@ -28,6 +29,16 @@ export default function App() {
           component={mostrador}
           options={{
             title: 'Mostrador',
+            headerTitleAlign: "left",
+            headerStyle: { backgroundColor: "board" },
+            headerTintColor: "white",
+          }}
+        />
+        <Stack.Screen
+          name="createpedM"
+          component={createpedM}
+          options={{
+            title: 'crear pedido',
             headerTitleAlign: "left",
             headerStyle: { backgroundColor: "board" },
             headerTintColor: "white",
