@@ -1,31 +1,46 @@
 import React, { useState, useEffect } from 'react'
-import { Text, TextInput, StyleSheet, View, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { Text, TextInput, StyleSheet, View, ScrollView, TouchableOpacity, Alert, Image, StatusBar } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
-import appfirabase from '../firebaseConfig';
-import { getAuth, singInWithEmailAndPassword } from 'firebase/auth';
-const auth =getAuth (appfirabase)
+import appfirebase from '../firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+const auth = getAuth(appfirebase)
 
+//secureTextEntry={true}  // Hace que los caracteres se muestren como "*"
 
 export default function login(props) {
   const [Email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const logueo = async()=>{
+  useEffect(() => {
+    // Cambiar el color de la barra de estado a blanco
+    StatusBar.setBarStyle('light-content'); // Cambiar el texto a color claro (si es necesario)
+    StatusBar.setBackgroundColor('transparent'); // Establecer un fondo transparente
+  }, []);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const logueo = async () => {
     try {
-        await singInWithEmailAndPassword(auth, Email, password)
-        Alert.alert('iniciando sesion', 'Acediendo..')
-        props.navigation.navigate('mostrador')
+      await signInWithEmailAndPassword(auth, Email, password)
+      Alert.alert('iniciando sesion', 'Accediendo..')
+      props.navigation.navigate('mostrador')
     } catch (error) {
-        console.log(error);
+      console.log(error);
+      Alert.alert('Correo electronico o contraseña incorrecto')
     }
   }
   return (
     <View style={styles.container}>
       {/* Círculo */}
       <View style={styles.circle}>
-        <image source={require('@/assets/logomovil.png')} />
-        <Text>Círculo</Text>
+        <Image
+          source={require('../assets/logomovil-v3.png')} 
+          style={styles.logo}
+        />
       </View>
 
       {/* Primer Input */}
@@ -35,11 +50,23 @@ export default function login(props) {
       />
 
       {/* Segundo Input */}
-      <TextInput onChangeText={(text) => setPassword(text)}
-        style={styles.input}
-        placeholder="contraseña"
-        secureTextEntry={true}  // Hace que los caracteres se muestren como "*"
-      />
+      <View style={styles.passwordContainer}>
+        <TextInput onChangeText={(text) => setPassword(text)}
+          style={styles.inputPassword}
+          placeholder="contraseña"
+          secureTextEntry={!passwordVisible} // Alterna visibilidad
+          autoCapitalize="none"
+
+        />
+        <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
+          <Ionicons
+            name={passwordVisible ? 'eye-off' : 'eye'}
+            size={24}
+            color="gray"
+          />
+        </TouchableOpacity>
+      </View>
+
 
       {/* Botón que navega a otra pantalla */}
       <TouchableOpacity
@@ -60,8 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   circle: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     borderRadius: 50,
     backgroundColor: '#d3d3d3',
     justifyContent: 'center',
@@ -69,13 +96,33 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   input: {
-    width: 250,
-    height: 40,
-    borderColor: '#8B1874',
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+    borderColor: '#ccc',
     borderRadius: 5,
+    width: 250, // Ancho fijo para centrar
+    height: 50, // Misma altura que los inputs
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    width: 250, // Ancho fijo para centrar
+    height: 50, // Misma altura que los inputs
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  inputPassword: {
+    flex: 1,
+    paddingVertical: 10,
+  },
+  eyeIcon: {
+    paddingHorizontal: 5,
   },
   buttonNavigate: {
     width: 250,

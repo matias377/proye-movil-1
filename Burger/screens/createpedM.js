@@ -39,9 +39,9 @@ export default function createpedM (props) {
             </View>
 
             <View >
-                <Button style={{marginvertical: 10}} title="tomar peddido" onPress={savePedid}/>
+                <Button style={styles.buttonSpacing} title="tomar peddido" onPress={savePedid}/>
 
-                <Button style={{marginvertical: 10}} title="cancelar" onPress={() => props.navigation.navigate('mostrador')}/>
+                <Button style={styles.buttonSpacing} title="cancelar" onPress={() => props.navigation.navigate('mostrador')}/>
             </View>
 
         </ScrollView>
@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc'
+    },
+    buttonSpacing :{
+        marginTop: 20, // Opcional, puedes agregar espacio arriba
+        height: 15, // Espacio entre los botones
     }
-    
 });

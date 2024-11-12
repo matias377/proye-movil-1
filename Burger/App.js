@@ -3,8 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
-import appfirabase from '../firebaseConfig';
-import * as firabase from 'firebase'; 
 import login from './screens/login';
 import mostrador from './screens/mostrador';
 import createpedM from './screens/createpedM';
@@ -24,7 +22,7 @@ export default function App() {
           options={{
             title: 'Inicio',
             headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "board" },
+            headerStyle: { backgroundColor: "#800000" },
             headerTintColor: "white",
           }}
         />
@@ -34,7 +32,7 @@ export default function App() {
           options={{
             title: 'Mostrador',
             headerTitleAlign: "left",
-            headerStyle: { backgroundColor: "board" },
+            headerStyle: { backgroundColor: "#800000" },
             headerTintColor: "white",
           }}
         />
@@ -44,7 +42,7 @@ export default function App() {
           options={{
             title: 'crear pedido',
             headerTitleAlign: "left",
-            headerStyle: { backgroundColor: "board" },
+            headerStyle: { backgroundColor: "#800000" },
             headerTintColor: "white",
           }}
         />
@@ -54,7 +52,7 @@ export default function App() {
           options={{
             title: 'Mesas',
             headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "board" },
+            headerStyle: { backgroundColor: "#800000" },
             headerTintColor: "white",
           }}
         />
